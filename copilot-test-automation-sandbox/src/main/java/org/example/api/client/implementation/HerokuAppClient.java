@@ -13,13 +13,13 @@ public class HerokuAppClient {
     String url;
 
     private static final String GET_ALL_USERS = "users/all";
+    private static final String UPDATE_USER = "users/{id}";
 
     public HerokuAppClient() {
         this.httpRequestExecutor = new HttpRequestExecutor();
         this.url = "https://web-api-test1.herokuapp.com";
     }
 
-    // TODO
     public List<UserInfo> getAllUsers() {
         var request = getBaseUserSearchRequest();
         var response= httpRequestExecutor.get(request)
@@ -28,6 +28,22 @@ public class HerokuAppClient {
 
 
         return List.of(JsonUtils.map(response, UserInfo[].class));
+    }
+
+    public String updateUserInfo(UserInfo userInfo) {
+        var request = getBaseUserSearchRequest();
+
+        return httpRequestExecutor.put(request, userInfo.getId())
+                .statusCode(HttpStatus.SC_OK).extract()
+                .body().asString();
+    }
+
+    public String deleteUser(long id) {
+        var request = getBaseUserSearchRequest();
+
+        return httpRequestExecutor.delete(request, id)
+                .statusCode(HttpStatus.SC_OK).extract()
+                .body().asString();
     }
 
     private HttpRequest getBaseUserSearchRequest() {

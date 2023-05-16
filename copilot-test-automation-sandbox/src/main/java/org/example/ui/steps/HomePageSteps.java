@@ -24,4 +24,19 @@ public class HomePageSteps {
     public void openHomePage() {
         Selenide.open();
     }
+
+    public void changeLanguage(String language) {
+        homePage.getLanguageButton()
+                .shouldBe(visible)
+                .click();
+        homePage.getLanguageList().findBy(Condition.text(language))
+                .shouldBe(visible)
+                .click();
+    }
+
+    public String getSearchLanguage() {
+        return homePage.getLanguageButton()
+                .shouldBe(visible)
+                .text();
+    }
 }

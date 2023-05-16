@@ -34,8 +34,74 @@ public class HomePageStepsDefinitions {
                 .isGreaterThan(minResultsAmount);
     }
 
-    @When("user opens links results")
-    public void userOpensImagesResults() {
-        searchResultsPageSteps.openImagesResults();
+    @When("user clicks on {string} link")
+    public void userClicksOnLink(String linkName) {
+        switch (linkName) {
+            case "Images":
+                searchResultsPageSteps.openImagesResults();
+                break;
+            case "Videos":
+                searchResultsPageSteps.openVideosResults();
+                break;
+            case "News":
+                searchResultsPageSteps.openNewsResults();
+                break;
+            case "All":
+                searchResultsPageSteps.openLinksResults();
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown link name: " + linkName);
+        }
+    }
+
+    @Then("user sees {string} search results")
+    public void userSeesSearchResults(String linkName) {
+        switch (linkName) {
+            case "Images":
+                searchResultsPageSteps.verifyImagesSearchResultsAreOpen();
+                break;
+            case "Videos":
+                searchResultsPageSteps.verifyVideosSearchResultsAreOpen();
+                break;
+            case "News":
+                searchResultsPageSteps.verifyNewsSearchResultsAreOpen();
+                break;
+            case "All":
+                searchResultsPageSteps.verifyLinksSearchResultsAreOpen();
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown link name: " + linkName);
+        }
+    }
+
+    @When("user searches for {string} in {string}")
+    public void userSearchesForTestInAll(String searchRequest, String linkName) {
+        switch (linkName) {
+            case "Images":
+                searchResultsPageSteps.openImagesResults();
+                break;
+            case "Videos":
+                searchResultsPageSteps.openVideosResults();
+                break;
+            case "News":
+                searchResultsPageSteps.openNewsResults();
+                break;
+            case "All":
+                searchResultsPageSteps.openLinksResults();
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown link name: " + linkName);
+        }
+        homePageSteps.search(searchRequest);
+    }
+
+    @When("user changes search language to {string}")
+    public void userChangesSearchLanguageTo(String language) {
+        homePageSteps.changeLanguage(language);
+    }
+
+    @Then("user sees search language is {string}")
+    public void userSeesSearchLanguageIs(String language) {
+        assertThat(homePageSteps.getSearchLanguage()).isEqualTo(language);
     }
 }

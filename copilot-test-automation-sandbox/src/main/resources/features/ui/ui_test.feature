@@ -4,7 +4,7 @@ Feature: Test Duck Duck Go search
     When user searches for 'Test'
     Then at least 1 result is found
 
-    Scenario: Search links
+    Scenario: Change language
     Given user opens home page
-    When user searches for 'Test'
-    Then at least 1 result is found
+    When user changes search language to 'Deutsch'
+    Then user sees search language is 'Deutsch'

@@ -42,6 +42,13 @@ public class HttpRequestExecutor {
         .patch(request.getPath(), pathParams)
         .then();
   }
+  public <T> ValidatableResponse delete(HttpRequest request, Object... pathParams) {
+    return configRestRequest(request)
+        .headers(request.getHeaders())
+        .body(request.getBody())
+        .delete(request.getPath(), pathParams)
+        .then();
+  }
 
   private RequestSpecification configRestRequest(HttpRequest request) {
     return RestAssuredLogger.givenWithLogging().relaxedHTTPSValidation()
