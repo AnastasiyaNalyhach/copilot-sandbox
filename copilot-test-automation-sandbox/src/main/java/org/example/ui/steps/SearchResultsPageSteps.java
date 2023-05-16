@@ -21,6 +21,12 @@ public class SearchResultsPageSteps {
                 .click();
     }
 
+    public void openLinksResults() {
+        page.getResultsTypeList().findBy(attribute("data-zci-link", "images"))
+                .shouldBe(visible, interactable)
+                .click();
+    }
+
     public int getResultsAmount() {
         return page.getResultsList().size();
     }

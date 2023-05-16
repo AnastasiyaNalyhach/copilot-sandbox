@@ -33,4 +33,9 @@ public class HomePageStepsDefinitions {
         assertThat(searchResultsPageSteps.getResultsAmount()).as("User should see at least %s result".formatted(minResultsAmount))
                 .isGreaterThan(minResultsAmount);
     }
+
+    @When("user opens links results")
+    public void userOpensImagesResults() {
+        searchResultsPageSteps.openImagesResults();
+    }
 }

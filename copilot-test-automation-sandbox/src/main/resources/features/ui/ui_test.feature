@@ -3,3 +3,8 @@ Feature: Test Duck Duck Go search
     Given user opens home page
     When user searches for 'Test'
     Then at least 1 result is found
+
+    Scenario: Search links
+    Given user opens home page
+    When user searches for 'Test'
+    Then at least 1 result is found
